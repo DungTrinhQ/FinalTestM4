@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Nation</title>
+</head>
+<body>
+<div>
+    <a th:href="@{/}">View Nation List</a>
+</div>
+<div>
+    <p th:text="${message}" style="color: green"></p>
+</div>
+<form th:action="@{/addNation}" method="post" th:object="${nation}">
+    <label>Nation Name:</label>
+    <input type="text" th:field="*{name}"><br>
+    <label>Nation GDP:</label>
+    <input type="text" th:field="*{GDP}"><br>
+
+    <button type="submit">Add Nation</button>
+</form>
+</body>
+</html>
