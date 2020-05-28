@@ -19,20 +19,20 @@ public class NationController {
     @Autowired
     INationService nationService;
 
-    @GetMapping(value = "/", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/")
     public ModelAndView getNationList(){
         ModelAndView modelAndView = new ModelAndView("Nation/NationList");
         List<Nation> nationList = nationService.getAllNation();
         modelAndView.addObject("nationList",nationList);
         return modelAndView;
     }
-    @GetMapping(value = "/addNation", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/addNation")
     public ModelAndView nationAddForm(){
         ModelAndView modelAndView = new ModelAndView("Nation/AddNation");
         modelAndView.addObject("nation",new Nation());
         return modelAndView;
     }
-    @PostMapping(value = "/addNation", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/addNation")
     public ModelAndView nationAddForm(@ModelAttribute("nation") Nation nation){
         ModelAndView modelAndView = new ModelAndView("Nation/AddNation");
         Nation newNation = nationService.addNation(nation);
@@ -43,7 +43,7 @@ public class NationController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/editNation/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/editNation/{id}")
     public ModelAndView nationEditForm(@PathVariable("id") Long nationId){
         ModelAndView modelAndView = new ModelAndView("Nation/editNation");
         Nation nation = nationService.findNationById(nationId);
@@ -54,7 +54,7 @@ public class NationController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/editNation", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/editNation")
     public ModelAndView nationEdit(@ModelAttribute("nation") Nation nation) {
         ModelAndView modelAndView = new ModelAndView("Nation/editNation");
         Nation editedNation = nationService.updateNation(nation);
@@ -68,7 +68,7 @@ public class NationController {
         }
     }
 
-    @GetMapping(value = "/deleteNation/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/deleteNation/{id}")
     public ModelAndView nationDeleteForm(@PathVariable("id") Long nationId){
         ModelAndView modelAndView = new ModelAndView("Nation/deleteNation");
         Nation nation = nationService.findNationById(nationId);
@@ -79,7 +79,7 @@ public class NationController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/deleteNation", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/deleteNation")
     public ModelAndView nationDelete(@ModelAttribute("nation") Nation nation) {
         ModelAndView modelAndView = new ModelAndView("Nation/NationList");
         nationService.removeNation(nation);

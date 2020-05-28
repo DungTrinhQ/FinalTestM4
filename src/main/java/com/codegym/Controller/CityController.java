@@ -7,7 +7,6 @@ import com.codegym.Service.INationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,7 @@ public class CityController {
         return nationService.getAllNation();
     }
 
-    @GetMapping(value = "/cityList", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/cityList")
     public ModelAndView listCategory(){
         ModelAndView modelAndView = new ModelAndView("City/CityList");
         List<City> cityList = cityService.getAllCity();
@@ -38,14 +37,14 @@ public class CityController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/cityAdd", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/cityAdd")
     public ModelAndView cityAddForm(){
         ModelAndView modelAndView = new ModelAndView("City/addCity");
         modelAndView.addObject("city",new City());
         return modelAndView;
     }
 
-    @PostMapping(value = "/cityAdd", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/cityAdd")
     public ModelAndView cityAdd(@ModelAttribute("city") City city, BindingResult result){
         ModelAndView modelAndView = new ModelAndView("City/addCity");
         City newCity = cityService.addCity(city);
@@ -55,7 +54,7 @@ public class CityController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/editCity/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/editCity/{id}")
     public ModelAndView nationEditForm(@PathVariable("id") Long cityId){
         ModelAndView modelAndView = new ModelAndView("City/editCity");
         City city = cityService.findCityById(cityId);
@@ -66,7 +65,7 @@ public class CityController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/editCity", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/editCity")
     public ModelAndView nationEdit(@Valid @ModelAttribute("city") City city, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView("City/editCity");
         City editedCity = cityService.updateCity(city);
@@ -80,7 +79,7 @@ public class CityController {
         }
     }
 
-    @GetMapping(value = "/deleteCity/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @GetMapping(value = "/deleteCity/{id}")
     public ModelAndView nationDeleteForm(@PathVariable("id") Long cityId){
         ModelAndView modelAndView = new ModelAndView("City/deleteCity");
         City city = cityService.findCityById(cityId);
@@ -91,7 +90,7 @@ public class CityController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/deleteCity", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/deleteCity")
     public String nationDelete(@ModelAttribute("city") City city) {
         ModelAndView modelAndView = new ModelAndView("City/CityList");
         cityService.removeCity(city);
